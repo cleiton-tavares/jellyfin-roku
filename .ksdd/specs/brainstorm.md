@@ -3,7 +3,7 @@
 > The Jellyfin Roku client with a better TV experience, built by AI agents.
 
 **Date:** 31/10/2026
-**Status:** Draft
+**Status:** Approved
 
 ## 1. Concept in one sentence
 
