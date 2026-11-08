@@ -3,7 +3,8 @@
 > A calmer way to watch Jellyfin on Roku. Unofficial, and built by AI agents.
 
 **Version:** 1.0
-**Last updated:** 31/10/2026
+**Last updated:** 08/11/2026
+**Status:** Approved
 **Target platform (MVP):** Roku devices, installed by sideloading
 **Interface language:** English source copy, plus the 14 other locales inherited from the official client. New copy may appear in English until translated. Household TV language `[to confirm]`.
 
@@ -214,7 +215,7 @@ Phase 1 is a **visual consistency pass only**: artwork treatment, type, focus st
    - Who's watching: "With kids" (the default each time) or "Just adults".
    - Mood: Light, Exciting, Thoughtful or Surprise me `[hypothesis]`.
    - A Suggest button.
-2. **Waiting:** a calm loading state. After about 10 seconds it stops waiting and uses the fallback `[hypothesis]`.
+2. **Waiting:** skeleton tiles in the three result slots. After about 10 seconds it stops waiting and uses the fallback `[hypothesis]`.
 3. **Results:** three titles with artwork, a one-line reason and an "AI suggestion" label, plus Try Again. OK opens details.
 
 "With kids" applies the rating limit and excludes unrated items. "Just adults" removes the limit.
@@ -401,7 +402,7 @@ JEllo has no telemetry, to respect self-hosters' privacy. All targets are `[hypo
 
 **For the maintainer:**
 
-- Confirm the name spelling, "JEllo". It's also close to the JELL-O trademark `[to validate]`. This doesn't block a sideloaded household app, but check it before any store listing.
+- The name spelling "JEllo" was confirmed on 08/11/2026. It's close to the JELL-O trademark `[to validate]`. This doesn't block a sideloaded household app, but check it before any store listing.
 - Test devices, household TV language and kids' ages.
 - Default rating limit for automatic picks.
 - Any deadline or budget.
