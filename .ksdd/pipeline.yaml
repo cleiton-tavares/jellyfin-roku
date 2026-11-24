@@ -1,0 +1,79 @@
+# Kognar Agentic SDLC pipeline of Jellyfin Roku.
+# Kognar keeps this file in sync with the project. Edit it and Kognar shows the changes before applying them.
+# Format: agentic-sdlc.kognar.com/v1 (stages and phases refer to each other by key).
+
+apiVersion: agentic-sdlc.kognar.com/v1
+kind: PipelineTemplate
+metadata:
+  name: Lean prototype
+spec:
+  type: loop
+  stages:
+    - key: premise
+      kind: premise
+      name: Premise / Need
+      artifact: SPEC.md
+      tools: [claude_code, ksdd]
+      gate: approval
+      maxAttempts: 1
+    - key: features
+      kind: features
+      name: Features
+      artifact: PRODUCT.md
+      tools: [claude_code]
+      gate: approval
+      maxAttempts: 1
+    - key: screen_flow
+      kind: screen_flow
+      name: Screen flow
+      artifact: design.pen
+      tools: [pen_dev]
+      gate: approval
+      maxAttempts: 1
+    - key: phase_breakdown
+      kind: phase_breakdown
+      name: Phase breakdown
+      artifact: Build-plan.md
+      tools: [kognar_platform]
+      gate: auto
+      maxAttempts: 1
+    - key: implementation
+      kind: implementation
+      name: Prototype implementation
+      artifact: Pull requests
+      tools: [claude_code, ksdd]
+      gate: auto
+      maxAttempts: 1
+    - key: deploy_test
+      kind: deploy_test
+      name: Deploy to test environment
+      artifact: Test URL
+      tools: [docker, cloudflare, playwright, vercel]
+      gate: auto
+      maxAttempts: 1
+  loop:
+    reentry: features
+    trigger: production_approval
+    carryOver: approved_artifacts
+    firstIteration: [premise, screen_flow]
+    phases:
+      - key: plan
+        name: Plan
+        stages: [premise, features]
+        onFailure:
+          action: pause
+      - key: design
+        name: Design
+        stages: [screen_flow]
+        onFailure:
+          action: pause
+      - key: build
+        name: Build
+        stages: [phase_breakdown, implementation]
+        onFailure:
+          action: pause
+      - key: deploy
+        name: Deploy
+        stages: [deploy_test]
+        onFailure:
+          action: pause
